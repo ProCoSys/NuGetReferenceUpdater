@@ -32,15 +32,12 @@ namespace NugetReferenceUpdater.Classes
                 {
                     var result = Converter.Inspect(file);
                     WriteToConsole(file, result);
-                    switch (result)
+                    if (result == Is.Updated)
                     {
-                        case Is.Inspected:
-                            _filesInspected++;
-                            break;
-                        case Is.Updated:
-                            _filesUpdated++;
-                            break;
+                        _filesUpdated++;
                     }
+
+                    _filesInspected++;
                 }
                 catch (Exception e)
                 {
@@ -50,7 +47,7 @@ namespace NugetReferenceUpdater.Classes
 
             Parallel.ForEach(directory.EnumerateDirectories(), ParseRecursive);
         }
-        
+
         private void WriteToConsole(FileInfo file, Is action)
         {
             Console.WriteLine(action + ": " + file.Name + " under " + new PathTo(file).RelativeTo(BaseOfFileTree));

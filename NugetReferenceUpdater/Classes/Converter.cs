@@ -15,7 +15,7 @@ namespace NugetReferenceUpdater.Classes
             var changes = false;
             while ((line = stream.ReadLine()) != null)
             {
-                if (!line.Contains(Options.Current.PackageName))
+                if (!line.ToLower().Contains(Options.Current.PackageName.ToLower()))
                 {
                     packageFile.AppendLine(line);
                 }
@@ -26,7 +26,7 @@ namespace NugetReferenceUpdater.Classes
                     action = Is.Updated;
                 }
             }
-
+            
             stream.Close();
 
             if (changes)

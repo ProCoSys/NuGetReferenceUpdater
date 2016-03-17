@@ -17,7 +17,7 @@ namespace NugetReferenceUpdater.Classes
 
             if (args.Length != 3)
             {
-                Console.WriteLine("Missing arguments");
+                Console.WriteLine("Missing arguments. Syntax is: NuGetReferenceUpdater <package name> <old version> <new version>");
                 Console.ReadLine();
                 arguments.MisingArguments = true;
             }
