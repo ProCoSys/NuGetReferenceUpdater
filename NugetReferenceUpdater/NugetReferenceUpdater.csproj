@@ -46,7 +46,7 @@
     <Compile Include="Classes\FilesTree.cs" />
     <Compile Include="Classes\Is.cs" />
     <Compile Include="Classes\Options.cs" />
-    <Compile Include="Classes\PackageFile.cs" />
+    <Compile Include="Classes\ConvertableFile.cs" />
     <Compile Include="Classes\PathTo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

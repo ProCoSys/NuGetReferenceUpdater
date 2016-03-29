@@ -7,7 +7,7 @@ namespace NugetReferenceUpdater.Classes
     {
         public static Is Inspect(FileInfo file)
         {
-            var packageFile = new PackageFile();
+            var convertableFile = new ConvertableFile();
             var action = Is.Inspected;
 
             string line;
@@ -17,13 +17,17 @@ namespace NugetReferenceUpdater.Classes
             {
                 if (!line.ToLower().Contains(Options.Current.PackageName.ToLower()))
                 {
-                    packageFile.AppendLine(line);
+                    convertableFile.AppendLine(line);
                 }
-                else if(line.Contains(Options.Current.OldVersion))
+                else if (line.Contains(Options.Current.OldVersion))
                 {
-                    packageFile.AppendTransformedLine(line);
+                    convertableFile.AppendTransformedLine(line);
                     changes = true;
                     action = Is.Updated;
+                }
+                else
+                {
+                    convertableFile.AppendLine(line);
                 }
             }
             
@@ -31,7 +35,7 @@ namespace NugetReferenceUpdater.Classes
 
             if (changes)
             {
-                packageFile.OverWrite(file);
+                convertableFile.OverWrite(file);
             }
 
             return action;

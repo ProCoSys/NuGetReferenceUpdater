@@ -1,9 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 
 namespace NugetReferenceUpdater.Classes
 {
-    public class PackageFile
+    public class ConvertableFile
     {
         private StringBuilder sb = new StringBuilder();
 

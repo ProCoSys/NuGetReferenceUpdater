@@ -1,20 +1,18 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace NugetReferenceUpdater.Classes
 {
     public class FileTree
     {
-        private int _filesUpdated;
         private int _filesInspected;
+        private int _filesUpdated;
 
         public DirectoryInfo BaseOfFileTree
         {
-            get
-            {
-                return new DirectoryInfo(Directory.GetCurrentDirectory());
-            }
+            get { return new DirectoryInfo(Directory.GetCurrentDirectory()); }
         }
 
         public FileTree ParseFiles()
@@ -26,7 +24,10 @@ namespace NugetReferenceUpdater.Classes
 
         private void ParseRecursive(DirectoryInfo directory)
         {
-            foreach (var file in directory.GetFiles("packages.config"))
+            var files = directory.EnumerateFiles("*.*")
+                .Where(x => x.Name.ToLower() == "packages.config" || x.Extension == ".csproj");
+
+            foreach (var file in files)
             {
                 try
                 {
